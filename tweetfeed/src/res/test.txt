@@ -1,0 +1,3 @@
+const text = "My test text";
+
+export default text; 

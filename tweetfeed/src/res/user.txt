@@ -1,0 +1,5 @@
+Mark follows Karl, Valerie
+Karl follows Vanessa
+Mark follows Vanessa, Karl
+Valerie follows Mark, Vanessa
+Vanessa follows Valerie
