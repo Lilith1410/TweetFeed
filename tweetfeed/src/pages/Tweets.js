@@ -5,8 +5,14 @@ class Tweets extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tweets: ['Tweet1', 'Tweet2', 'Tweet3', 'Tweet4', 'Tweet5'],
+      tweets: [
+        'Vitalik> Things like tornado cash and uniswap, kyber and the like are successful in part because they are just tools that people can put into their existing workflows, and not ecosystems. We need more tools that are content with being tools and fewer attempts at ecosystems.',
+        'Michael> There are only two hard things in Computer Science: cache invalidation, naming things and off-by-1 errors.',
+        'Kent> For it should never feel the high complexity of the future of preference',
+        'Veronica> Worried about shifting your focus from now another sister will surely become to have bugs, only!',
+        'Michael> If your linter tortures you its complexity and were building'] ,
     }
+    {/*Mind the ' in words like "we're". That ends the string. You have to check for that beforehand! */}
   }
 
   render() {

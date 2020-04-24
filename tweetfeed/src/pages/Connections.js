@@ -10,6 +10,7 @@ class Connections extends Component {
         ['Mark', 'Valerie', 'Karl', 'Vanessa'],
         ['Karl', 'Vanessa'],
         ['Valerie', 'Vanessa', 'Mark'],
+      ]
     }
   }
 

@@ -19,6 +19,7 @@ class App extends Component {
         <Connections />
         <Tweets/>
         <Footer/>
+
       </div>
     );
   }
