@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import { NavBar } from '../components'
-import { TweefsList, TweefsInsert, TweefsUpdate } from '../pages'
+import { TweefsList, TweefsInsert, TweefsUpdate, UserProfile } from '../pages'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -17,6 +17,7 @@ class App extends Component {
             <Route path="/tweefs/list" exact component={TweefsList} />
             <Route path="/tweefs/create" exact component={TweefsInsert} />
             <Route path="/tweefs/update/:id" exact component={TweefsUpdate} />
+            <Route path="/tweefs/user/:id" exact component={UserProfile} />
           </Switch>
         </Router>
       </div>

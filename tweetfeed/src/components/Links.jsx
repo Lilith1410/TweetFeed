@@ -16,28 +16,33 @@ const Item = styled.div.attrs({
 
 class Links extends Component {
     render() {
-        return (
-            <React.Fragment>
-                <Link to="/" className="navbar-brand">
-                    TweetFeed
+      return (
+        <React.Fragment>
+          <Link to="/" className="navbar-brand">
+            TweetFeed
+          </Link>
+          <Collapse>
+            <List>
+              <Item>
+                <Link to="/tweefs/list" className="nav-link">
+                  List tweefs
                 </Link>
-                <Collapse>
-                    <List>
-                        <Item>
-                            <Link to="/tweefs/list" className="nav-link">
-                                List tweefs
-                            </Link>
-                        </Item>
-                        <Item>
-                            <Link to="/tweefs/create" className="nav-link">
-                                Create Tweef
-                            </Link>
-                        </Item>
-                    </List>
-                </Collapse>
-            </React.Fragment>
-        )
-    }
+              </Item>
+              <Item>
+                <Link to="/tweefs/create" className="nav-link">
+                  Create Tweef
+                </Link>
+              </Item>
+              <Item>
+                <Link to="/tweefs/user" className="nav-link">
+                  User
+                </Link>
+              </Item>
+            </List>
+          </Collapse>
+      </React.Fragment>
+    )
+  }
 }
 
 export default Links
