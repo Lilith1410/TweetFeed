@@ -42,7 +42,7 @@ class TweefsUpdate extends Component {
         this.state = {
             id: this.props.match.params.id,
             userName: '',
-            rating: '',
+            tweets: '',
             follows: '',
         }
     }
@@ -53,11 +53,11 @@ class TweefsUpdate extends Component {
     }
 
     handleChangeInputRating = async event => {
-        const rating = event.target.validity.valid
+        const tweets = event.target.validity.valid
             ? event.target.value
-            : this.state.rating
+            : this.state.tweets
 
-        this.setState({ rating })
+        this.setState({ tweets })
     }
 
     handleChangeInputTime = async event => {
@@ -66,15 +66,15 @@ class TweefsUpdate extends Component {
     }
 
     handleUpdateTweef = async () => {
-        const { id, userName, rating, follows } = this.state
+        const { id, userName, tweets, follows } = this.state
         const arrayFollows = follows.split('/')
-        const payload = { userName, rating, follows: arrayFollows }
+        const payload = { userName, tweets, follows: arrayFollows }
 
         await api.updateTweefById(id, payload).then(res => {
             window.alert(`Tweef updated successfully`)
             this.setState({
                 userName: '',
-                rating: '',
+                tweets: '',
                 follows: '',
             })
         })
@@ -86,13 +86,13 @@ class TweefsUpdate extends Component {
 
         this.setState({
             userName: tweef.data.data.userName,
-            rating: tweef.data.data.rating,
+            tweets: tweef.data.data.tweets,
             follows: tweef.data.data.follows.join('/'),
         })
     }
 
     render() {
-        const { userName, rating, follows } = this.state
+        const { userName, tweets, follows } = this.state
         return (
             <Wrapper>
                 <Title>Create Tweef</Title>
@@ -104,7 +104,7 @@ class TweefsUpdate extends Component {
                     onChange={this.handleChangeInputName}
                 />
 
-                <Label>Rating: </Label>
+                <Label>Tweets: </Label>
                 <InputText
                     type="number"
                     step="0.1"
@@ -112,7 +112,7 @@ class TweefsUpdate extends Component {
                     min="0"
                     max="10"
                     pattern="[0-9]+([,\.][0-9]+)?"
-                    value={rating}
+                    value={tweets}
                     onChange={this.handleChangeInputRating}
                 />
 

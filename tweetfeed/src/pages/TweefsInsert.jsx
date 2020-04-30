@@ -42,7 +42,7 @@ class TweefsInsert extends Component {
 
     this.state = {
       userName: '',
-      rating: '',
+      tweets: '',
       follows: '',
     }
   }
@@ -53,11 +53,11 @@ class TweefsInsert extends Component {
    }
 
   handleChangeInputRating = async event => {
-    const rating = event.target.validity.valid
+    const tweets = event.target.validity.valid
       ? event.target.value
-      : this.state.rating
+      : this.state.tweets
 
-    this.setState({ rating })
+    this.setState({ tweets })
   }
 
   handleChangeInputTime = async event => {
@@ -66,15 +66,15 @@ class TweefsInsert extends Component {
   }
 
   handleIncludeTweef = async () => {
-    const { userName, rating, follows } = this.state
+    const { userName, tweets, follows } = this.state
     const arrayFollows = follows.split('/')
-    const payload = { userName, rating, follows: arrayFollows }
+    const payload = { userName, tweets, follows: arrayFollows }
 
     await api.insertTweef(payload).then(res => {
       window.alert(`Tweef inserted successfully`)
       this.setState({
         userName: '',
-        rating: '',
+        tweets: '',
         follows: '',
       })
     })
@@ -82,7 +82,7 @@ class TweefsInsert extends Component {
 
 
   render() {
-    const { userName, rating, follows } = this.state
+    const { userName, tweets, follows } = this.state
 
     return(
       <Wrapper>
@@ -94,7 +94,7 @@ class TweefsInsert extends Component {
           onChange={this.handleChangeInputName}
         />
 
-        <Label>Rating: </Label>
+        <Label>Tweets: </Label>
         <InputText
           type="number"
           step="0.1"
@@ -102,7 +102,7 @@ class TweefsInsert extends Component {
           min="0"
           max="10"
           pattern="[0-9]+([,\.][0-9]+)?"
-          value={rating}
+          value={tweets}
           onChange={this.handleChangeInputRating}
         />
 

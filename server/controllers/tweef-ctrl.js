@@ -54,7 +54,7 @@ updateTweef = async (req, res) => {
 
     tweef.userName = body.userName
     tweef.follows = body.follows
-    tweef.rating = body.rating
+    tweef.tweets = body.tweets
     tweef
       .save()
       .then(() => {

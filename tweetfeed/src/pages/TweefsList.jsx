@@ -88,8 +88,8 @@ class TweefsList extends Component {
                 filterable: true,
             },
             {
-                Header: 'Rating',
-                accessor: 'rating',
+                Header: 'Tweets',
+                accessor: 'tweets',
                 filterable: true,
             },
             {
