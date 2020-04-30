@@ -12,11 +12,13 @@
     "react-table": "^6.0.0",
     "styled-components": "^5.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "^7.1.2"
+  },
   "scripts": {
     "start": "PORT=34573 react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "mocha",
     "eject": "react-scripts eject"
   }
 }
