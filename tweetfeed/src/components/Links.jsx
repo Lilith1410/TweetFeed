@@ -43,6 +43,11 @@ class Links extends Component {
                   User
                 </Link>
               </Item>
+              <Item>
+                <Link to="/tweefs/user/id/follows" className="nav-link">
+                  Follows
+                </Link>
+              </Item>
             </List>
           </Collapse>
       </React.Fragment>
