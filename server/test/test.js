@@ -1,6 +1,6 @@
-"use strict";
+{/*
 
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 const chai = require('chai')
 const expect = chai.expect
@@ -8,31 +8,51 @@ const assert = require('assert')
 
 const Tweef = require('../models/tweef-model.js')
 
-const testSchema = new Schema({
-  name: {type: String, required: true }
-})
+mongoose.Promise = global.Promise
 
-{/*Create new collection called 'Name' */}
-const Name = mongoose.model('Name', testSchema)
+mongoose.connect('mongodb//127.0.0.1:27017/tweefs')
+mongoose.connection
+  .once('open', () => console.log('Connected!'))
+  .on('error', (error) => {
+    console.warn('Error: ', error)
+  })
 
-describe('Database Tests', function({
-
-  mongoose.connect('mongodb://127.0.0.1:27017/tweefs')
-  mongoose.connection
-    .once('open', () => console.log('Connected!'))
-    .on('error', (error) => {
-      console.warn('Error: ', error)
-    })
-
-  // Clear database so we have a clean slate to test with
-  beforeEach((done) => {
+beforeEach((done) => {
     mongoose.connection.collections.tweefs.drop(() => {
-      done()
+         //this function runs after the drop is completed
+        done(); //go ahead everything is done now.
+    });
+});
+
+
+
+
+
+
+
+  describe('Creating documents', () => {
+    it('creates a Tweef', (done) => {
+      const tweef = new Tweef({ name: 'Valerie' })
+      tweef.save()
+            .then(() => {
+              assert(!tweef.isNew) // if tweef is saved to db it is not new
+              done()
+            })
     })
   })
 
+  describe('Database Tests', function({
 
-}))
+
+    // Clear database so we have a clean slate to test with
+      beforeEach((done) => {
+      mongoose.connection.collections.tweefs.drop(() => {
+        done()
+      })
+    })
+
+
+  }))
 
 describe('Tweef was created', function({
 
@@ -135,3 +155,5 @@ describe('Get Tweefs', function({
   it.('List empty - Tweefs not returned', function({}))
 
 }))
+
+*/}
