@@ -4,6 +4,9 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const chai = require('chai')
 const expect = chai.expect
+const assert = require('assert')
+
+const Tweef = require('../models/tweef-model.js')
 
 const testSchema = new Schema({
   name: {type: String, required: true }
@@ -12,57 +15,24 @@ const testSchema = new Schema({
 {/*Create new collection called 'Name' */}
 const Name = mongoose.model('Name', testSchema)
 
-describe('Database Tests', function() {
+describe('Database Tests', function({
 
-  {/*Before testing create a sandbox database connection then invoke done */}
-  before(function (done) {
-    mongoose.connect('mongodb://localhost/testDatabase')
-    const db = mongoose.connection
-    db.on('error', console.error.bind(console, 'connection error'))
-    db.once('open', function() {
-      console.log('We are connected to test database. ')
+  mongoose.connect('mongodb://127.0.0.1:27017/tweefs')
+  mongoose.connection
+    .once('open', () => console.log('Connected!'))
+    .on('error', (error) => {
+      console.warn('Error: ', error)
+    })
+
+  // Clear database so we have a clean slate to test with
+  beforeEach((done) => {
+    mongoose.connection.collections.tweefs.drop(() => {
       done()
     })
   })
 
-  describe('Test Database', function() {
-    it('New tweef object created and saved in test database', function(done) {
-      {/*Give correct input data*/}
-      var testName = Name({
-        name: 'Kurt'
-      })
-      testName.save(done)
-    })
 
-    it('Dont save incorrect format to database', function(done) {
-      {/*Give wrong input data*/}
-      var wrongSave = Name({
-        notName: 'not Kurt'
-      })
-
-      wrongSave.save(err => {
-        if(err) { return done()}
-        throw new Error('Should generate error! ')
-      })
-    })
-
-    if('Shoudl retrieve data from test database', function(done) {
-      {/*Look up the previously saved Kurt Object*/}
-      Name.find({name: 'Kurt'}, (err, name) => {
-        if(err) {throw err}
-        if(name.length === 0) {throw new Error('No data')}
-        done()
-      })
-    })
-
-  {/*After all tests are done, clean up database and close connection */}
-  after(function(done) {
-    mongoose.connection.db.dropDatabase(function() {
-      mongoose.connection.close(done)
-    })
-  })
-})
-})
+}))
 
 describe('Tweef was created', function({
 
