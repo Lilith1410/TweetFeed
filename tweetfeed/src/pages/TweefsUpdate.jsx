@@ -47,12 +47,12 @@ class TweefsUpdate extends Component {
         }
     }
 
-    handleChangeInputName = async event => {
+    handleChangeInputUserName = async event => {
         const userName = event.target.value
         this.setState({ userName })
     }
 
-    handleChangeInputRating = async event => {
+    handleChangeInputTweets = async event => {
         const tweets = event.target.validity.valid
             ? event.target.value
             : this.state.tweets
@@ -60,7 +60,7 @@ class TweefsUpdate extends Component {
         this.setState({ tweets })
     }
 
-    handleChangeInputTime = async event => {
+    handleChangeInputFollows = async event => {
         const follows = event.target.value
         this.setState({ follows })
     }
@@ -101,7 +101,7 @@ class TweefsUpdate extends Component {
                 <InputText
                     type="text"
                     value={userName}
-                    onChange={this.handleChangeInputName}
+                    onChange={this.handleChangeInputUserName}
                 />
 
                 <Label>Tweets: </Label>
@@ -113,14 +113,14 @@ class TweefsUpdate extends Component {
                     max="10"
                     pattern="[0-9]+([,\.][0-9]+)?"
                     value={tweets}
-                    onChange={this.handleChangeInputRating}
+                    onChange={this.handleChangeInputTweets}
                 />
 
                 <Label>Follows: </Label>
                 <InputText
                     type="text"
                     value={follows}
-                    onChange={this.handleChangeInputTime}
+                    onChange={this.handleChangeInputFollows}
                 />
 
                 <Button onClick={this.handleUpdateTweef}>Update Tweef</Button>
