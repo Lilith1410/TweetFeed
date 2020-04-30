@@ -43,7 +43,7 @@ class TweefsUpdate extends Component {
             id: this.props.match.params.id,
             userName: '',
             rating: '',
-            time: '',
+            follows: '',
         }
     }
 
@@ -61,21 +61,21 @@ class TweefsUpdate extends Component {
     }
 
     handleChangeInputTime = async event => {
-        const time = event.target.value
-        this.setState({ time })
+        const follows = event.target.value
+        this.setState({ follows })
     }
 
     handleUpdateTweef = async () => {
-        const { id, userName, rating, time } = this.state
-        const arrayTime = time.split('/')
-        const payload = { name, rating, time: arrayTime }
+        const { id, userName, rating, follows } = this.state
+        const arrayFollows = follows.split('/')
+        const payload = { userName, rating, follows: arrayFollows }
 
         await api.updateTweefById(id, payload).then(res => {
             window.alert(`Tweef updated successfully`)
             this.setState({
                 userName: '',
                 rating: '',
-                time: '',
+                follows: '',
             })
         })
     }
@@ -87,17 +87,17 @@ class TweefsUpdate extends Component {
         this.setState({
             userName: tweef.data.data.userName,
             rating: tweef.data.data.rating,
-            time: tweef.data.data.time.join('/'),
+            follows: tweef.data.data.follows.join('/'),
         })
     }
 
     render() {
-        const { userName, rating, time } = this.state
+        const { userName, rating, follows } = this.state
         return (
             <Wrapper>
                 <Title>Create Tweef</Title>
 
-                <Label>Name: </Label>
+                <Label>Username: </Label>
                 <InputText
                     type="text"
                     value={userName}
@@ -116,10 +116,10 @@ class TweefsUpdate extends Component {
                     onChange={this.handleChangeInputRating}
                 />
 
-                <Label>Time: </Label>
+                <Label>Follows: </Label>
                 <InputText
                     type="text"
-                    value={time}
+                    value={follows}
                     onChange={this.handleChangeInputTime}
                 />
 

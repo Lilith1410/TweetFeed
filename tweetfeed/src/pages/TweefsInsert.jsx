@@ -43,7 +43,7 @@ class TweefsInsert extends Component {
     this.state = {
       userName: '',
       rating: '',
-      time: '',
+      follows: '',
     }
   }
 
@@ -61,28 +61,28 @@ class TweefsInsert extends Component {
   }
 
   handleChangeInputTime = async event => {
-    const time = event.target.value
-    this.setState({ time })
+    const follows = event.target.value
+    this.setState({ follows })
   }
 
   handleIncludeTweef = async () => {
-    const { userName, rating, time } = this.state
-    const arrayTime = time.split('/')
-    const payload = { userName, rating, time: arrayTime }
+    const { userName, rating, follows } = this.state
+    const arrayFollows = follows.split('/')
+    const payload = { userName, rating, follows: arrayFollows }
 
     await api.insertTweef(payload).then(res => {
       window.alert(`Tweef inserted successfully`)
       this.setState({
         userName: '',
         rating: '',
-        time: '',
+        follows: '',
       })
     })
   }
 
 
   render() {
-    const { userName, rating, time } = this.state
+    const { userName, rating, follows } = this.state
 
     return(
       <Wrapper>
@@ -106,10 +106,10 @@ class TweefsInsert extends Component {
           onChange={this.handleChangeInputRating}
         />
 
-        <Label>Time: </Label>
+        <Label>Follows: </Label>
         <InputText
           type="text"
-          value={time}
+          value={follows}
           onChange={this.handleChangeInputTime}
         />
 

@@ -53,7 +53,7 @@ updateTweef = async (req, res) => {
     }
 
     tweef.userName = body.userName
-    tweef.time = body.time
+    tweef.follows = body.follows
     tweef.rating = body.rating
     tweef
       .save()

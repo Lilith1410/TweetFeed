@@ -93,8 +93,8 @@ class TweefsList extends Component {
                 filterable: true,
             },
             {
-                Header: 'Time',
-                accessor: 'time',
+                Header: 'Follows',
+                accessor: 'follows',
                 Cell: props => <span>{props.value.join(' / ')}</span>,
             },
             {
