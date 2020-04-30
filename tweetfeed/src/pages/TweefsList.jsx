@@ -83,8 +83,8 @@ class TweefsList extends Component {
                 filterable: true,
             },
             {
-                Header: 'Name',
-                accessor: 'name',
+                Header: 'userName',
+                accessor: 'userName',
                 filterable: true,
             },
             {

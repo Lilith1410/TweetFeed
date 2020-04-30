@@ -52,7 +52,7 @@ updateTweef = async (req, res) => {
       })
     }
 
-    tweef.name = body.name
+    tweef.userName = body.userName
     tweef.time = body.time
     tweef.rating = body.rating
     tweef

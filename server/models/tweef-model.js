@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const Tweef = new Schema(
     {
-        name: { type: String, required: true },
+        userName: { type: String, required: true },
         time: { type: [String], required: true },
         rating: { type: Number, required: true },
     },

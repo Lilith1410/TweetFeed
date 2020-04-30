@@ -41,15 +41,15 @@ class TweefsUpdate extends Component {
 
         this.state = {
             id: this.props.match.params.id,
-            name: '',
+            userName: '',
             rating: '',
             time: '',
         }
     }
 
     handleChangeInputName = async event => {
-        const name = event.target.value
-        this.setState({ name })
+        const userName = event.target.value
+        this.setState({ userName })
     }
 
     handleChangeInputRating = async event => {
@@ -66,14 +66,14 @@ class TweefsUpdate extends Component {
     }
 
     handleUpdateTweef = async () => {
-        const { id, name, rating, time } = this.state
+        const { id, userName, rating, time } = this.state
         const arrayTime = time.split('/')
         const payload = { name, rating, time: arrayTime }
 
         await api.updateTweefById(id, payload).then(res => {
             window.alert(`Tweef updated successfully`)
             this.setState({
-                name: '',
+                userName: '',
                 rating: '',
                 time: '',
             })
@@ -85,14 +85,14 @@ class TweefsUpdate extends Component {
         const tweef = await api.getTweefById(id)
 
         this.setState({
-            name: tweef.data.data.name,
+            userName: tweef.data.data.userName,
             rating: tweef.data.data.rating,
             time: tweef.data.data.time.join('/'),
         })
     }
 
     render() {
-        const { name, rating, time } = this.state
+        const { userName, rating, time } = this.state
         return (
             <Wrapper>
                 <Title>Create Tweef</Title>
@@ -100,7 +100,7 @@ class TweefsUpdate extends Component {
                 <Label>Name: </Label>
                 <InputText
                     type="text"
-                    value={name}
+                    value={userName}
                     onChange={this.handleChangeInputName}
                 />
 
