@@ -20,7 +20,9 @@ class Mockup extends Component {
   render() {
     return (
       <Wrapper>
-        <p>This is the Mockup Page! </p>
+        <p>This is the Mockup Page! Here shall at one point be: </p>
+        <br />
+        <p> User Selection via Drop Down. Handing over the user id to UserProfile Page. And Drag&Drop Input of .txt-Files for DB Initialization.  </p>
       </Wrapper>
 
     )
