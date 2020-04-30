@@ -53,10 +53,7 @@ class TweefsInsert extends Component {
    }
 
   handleChangeInputTweets = async event => {
-    const tweets = event.target.validity.valid
-      ? event.target.value
-      : this.state.tweets
-
+    const tweets = event.target.value
     this.setState({ tweets })
   }
 
@@ -68,7 +65,8 @@ class TweefsInsert extends Component {
   handleIncludeTweef = async () => {
     const { userName, tweets, follows } = this.state
     const arrayFollows = follows.split('/')
-    const payload = { userName, tweets, follows: arrayFollows }
+    const arrayTweets = tweets.split('/')
+    const payload = { userName, tweets: arrayTweets, follows: arrayFollows }
 
     await api.insertTweef(payload).then(res => {
       window.alert(`Tweef inserted successfully`)
@@ -96,12 +94,7 @@ class TweefsInsert extends Component {
 
         <Label>Tweets: </Label>
         <InputText
-          type="number"
-          step="0.1"
-          lang="en-US"
-          min="0"
-          max="10"
-          pattern="[0-9]+([,\.][0-9]+)?"
+          type="text"
           value={tweets}
           onChange={this.handleChangeInputTweets}
         />

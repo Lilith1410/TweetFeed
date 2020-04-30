@@ -90,7 +90,7 @@ class TweefsList extends Component {
             {
                 Header: 'Tweets',
                 accessor: 'tweets',
-                filterable: true,
+                Cell: props => <span>{props.value.join(' / ')}</span>,
             },
             {
                 Header: 'Follows',

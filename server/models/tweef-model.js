@@ -5,7 +5,7 @@ const Tweef = new Schema(
     {
         userName: { type: String, required: true },
         follows: { type: [String], required: false },
-        tweets: { type: Number, required: false },
+        tweets: { type: [String], required: false },
     },
     { timestamps: true },
 )
