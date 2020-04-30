@@ -1,13 +1,15 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const Tweef = new Schema(
+const TweefSchema = new Schema(
     {
-        userName: { type: String, required: true },
+        userName: { type: String, required: [true, 'Username is required'] },
         follows: { type: [String], required: false },
-        tweets: { type: Number, required: false },
+        tweets: { type: [String], required: false },
     },
     { timestamps: true },
 )
 
-module.exports = mongoose.model('tweefs', Tweef)
+const Tweef = mongoose.model('Tweef', TweefSchema)
+
+module.exports = Tweef
