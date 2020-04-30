@@ -51,6 +51,8 @@ deleteTweef = async (req, res) => {
   }).catch(err => console.log(err))
 }
 
+{/*getTweef is missing! */}
+
 addFollowsToUser = async (req, res) => {
   const body = req.body
 
@@ -251,9 +253,40 @@ getTweetsByUser = async (req, res) => {
   }).catch(err => console.log(err))
 }
 
+getTweef = async (req, res) => {
+  await Tweef.findOne({ _id: req.params.id }, (err, tweef) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        if (!tweef) {
+            return res
+                .status(404)
+                .json({ success: false, error: `Tweef not found` })
+        }
+        return res.status(200).json({ success: true, data: tweef })
+    }).catch(err => console.log(err))
+}
+
+getTweefs = async (req, res) => {
+  await Tweef.find({}, (err, tweefs) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+        if (!tweefs.length) {
+            return res
+                .status(404)
+                .json({ success: false, error: `Tweefs not found` })
+        }
+        return res.status(200).json({ success: true, data: tweefs })
+    }).catch(err => console.log(err))
+}
+
 module.exports = {
   createTweef,
   deleteTweef,
+  getTweef,
+  getTweefs,
   addFollowsToUser,
   removeFollowsFromUser,
   addTweetToUser,

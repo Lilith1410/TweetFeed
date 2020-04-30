@@ -13,5 +13,7 @@ router.put('tweef/:user', TweefCtrl.addTweetToUser)
 router.delete('tweef/:user', TweefCtrl.removeTweetFromUser)
 router.get('tweef/:user', TweefCtrl.getFollowsByUser)
 router.get('tweef/:user', TweefCtrl.getTweetsByUser)
+router.get('tweef/:id', TweefCtrl.getTweef)
+router.get('tweefs/', TweefCtrl.getTweefs)
 
 module.exports = router
