@@ -48,6 +48,11 @@ class Links extends Component {
                   Follows
                 </Link>
               </Item>
+              <Item>
+                <Link to="/tweefs/user/id/feed" className="nav-link">
+                  Feed
+                </Link>
+              </Item>
             </List>
           </Collapse>
       </React.Fragment>
