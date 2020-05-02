@@ -18,10 +18,24 @@ class UserProfile extends Component {
     }
   }
 
+  componentDidMount = async () => {
+      const { id } = this.state
+      const tweef = await api.getTweefById(id)
+
+      this.setState({
+          userName: tweef.data.data.userName
+      })
+  }
+
   render() {
+    const { id, userName } = this.state
     return (
       <Wrapper>
         <p>This is the User Profile Page! </p>
+        <br/>
+        <p>Username: {userName}</p>
+        <br/>
+        <p>Id: {id}</p>
       </Wrapper>
 
     )
