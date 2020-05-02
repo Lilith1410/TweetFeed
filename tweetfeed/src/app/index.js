@@ -18,7 +18,7 @@ class App extends Component {
             <Route path="/tweefs/create" exact component={TweefsInsert} />
             <Route path="/tweefs/update/:id" exact component={TweefsUpdate} />
             <Route path="/tweefs/user/:id" exact component={UserProfile} />
-            <Route path="/tweefs/mockup" exact component={Mockup} />
+            <Route path="/mockup" exact component={Mockup} />
             <Route path="/tweefs/user/:id/follows" exact component={Follows} />
             <Route path="/tweefs/user/:id/feed" exact component={Feed} />
           </Switch>
