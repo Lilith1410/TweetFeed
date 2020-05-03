@@ -9,6 +9,7 @@ export const getAllTweefs = () => api.get(`/tweefs`)
 export const updateTweefById = (id, payload) => api.put(`/tweef/${id}`, payload)
 export const deleteTweefById = id => api.delete(`/tweef/${id}`)
 export const getTweefById = id => api.get(`/tweef/${id}`)
+export const getTweefByName = userName => api.get(`/tweef/`)
 
 const apis = {
     insertTweef,
@@ -16,6 +17,7 @@ const apis = {
     updateTweefById,
     deleteTweefById,
     getTweefById,
+    getTweefByName,
 }
 
 export default apis

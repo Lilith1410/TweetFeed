@@ -16,13 +16,15 @@ class Upload extends Component {
     this.state= {
       content: '',
       userName: '',
+      userId: '',
       follows: '',
       tweets: '',
       typeOf: this.props.typeOf,
     }
 
     this.handleUser = this.handleUser.bind(this)
-    this.handleIncludeTweef = this.handleIncludeTweef.bind(this)
+    this.checkUserExistence = this.checkUserExistence.bind(this)
+    this.inputTweefs = this.inputTweefs.bind(this)
   }
 
   handleUser = async (content) => {
@@ -36,29 +38,44 @@ class Upload extends Component {
 
       var tmp = contentLine[i].split(" follows ")
       var user = tmp[0]
-      console.log(user)
-      console.log(typeof user)
+
       this.setState({
         userName: user
       })
-      console.log("State: " + this.state.userName)
-      await this.handleIncludeTweef()
-      {/*
-      var follows = tmp[1]
-      console.log(user)
-      console.log(typeof user)
-      console.log(follows)
-      console.log(typeof follows)
-      */}
+      //console.log("State: " + this.state.userName)
+      await this.checkUserExistence()
+      if( this.state.userId === '' ){
+        await this.inputTweefs()
+
+      } else {
+        // nothing for now
+      }
+      this.setState({
+          userId: '',
+          userName: ''
+      })
     }
-    window.alert(`Tweef inserted successfully`)
+    window.alert(`Database initialized successfully. `)
   }
 
-  handleIncludeTweef = async () => {
+  checkUserExistence = async () => {
     const { userName } = this.state
     const payload = { userName }
 
-    // check if user exists! 
+    await api.getTweefByName(payload).then(tweef => {
+      for( var i = 0; i < tweef.data.data.length; i++) {
+        if(userName === tweef.data.data[i].userName) {
+          this.setState({
+            userId: tweef.data.data[i]._id
+          })
+        }
+      }
+    })
+  }
+
+  inputTweefs = async () => {
+    const { userName } = this.state
+    const payload = { userName }
 
     await api.insertTweef(payload).then(res => {
       this.setState({
