@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import ReactTable from 'react-table'
 import api from '../api'
 import Upload from './Upload'
+import DropDatabase from './DropDatabase'
 
 import styled from 'styled-components'
 
@@ -93,6 +94,8 @@ class Mockup extends Component {
                 minRows={0}
             />
         )}
+        <p>Delete complete Database here: </p>
+        <DropDatabase/>
         <br />
         <p>Upload the User Files here please :) </p>
         <Upload typeOf="user"/>
