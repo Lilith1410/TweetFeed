@@ -38,7 +38,7 @@ class DeleteTweef extends Component {
 
     if(
       window.confirm(
-        `Do tou want to delete the movie ${this.props.id} permanently?`,
+        `Do tou want to delete the tweef ${this.props.id} permanently?`,
       )
     ) {
       api.deleteTweefById(this.props.id)

@@ -48,7 +48,6 @@ class Mockup extends Component {
   render() {
 
     const { tweefs } = this.state
-    console.log('TCL: UserList -> render -> users', tweefs)
 
     const columns = [
       {
