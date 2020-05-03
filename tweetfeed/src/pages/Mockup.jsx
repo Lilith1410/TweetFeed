@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 // using table only for the moment. change to drop down as soon as possible!
 import ReactTable from 'react-table'
 import api from '../api'
+import Upload from './Upload'
 
 import styled from 'styled-components'
 
@@ -93,6 +94,12 @@ class Mockup extends Component {
                 minRows={0}
             />
         )}
+        <br />
+        <p>Upload the User Files here please :) </p>
+        <Upload typeOf="user"/>
+
+        <p>Upload the Tweet Files here please ^^  </p>
+        <Upload typeOf="tweets"/>
       </Wrapper>
 
     )
