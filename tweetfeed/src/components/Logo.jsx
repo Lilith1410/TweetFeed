@@ -11,7 +11,7 @@ class Logo extends Component {
     render() {
         return (
             <Wrapper href="https://vaske.codes">
-                <img src={logo} width="50" height="50" alt="vaske.codes" />
+                <img src={logo} width="35" height="50" alt="vaske.codes" />
             </Wrapper>
         )
     }

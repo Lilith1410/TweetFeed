@@ -38,7 +38,7 @@ class DeleteTweef extends Component {
 
     if(
       window.confirm(
-        `Do tou want to delete the movie ${this.props.id} permanently?`,
+        `Do tou want to delete the tweef ${this.props.id} permanently?`,
       )
     ) {
       api.deleteTweefById(this.props.id)
@@ -83,18 +83,18 @@ class TweefsList extends Component {
                 filterable: true,
             },
             {
-                Header: 'Name',
-                accessor: 'name',
+                Header: 'userName',
+                accessor: 'userName',
                 filterable: true,
             },
             {
-                Header: 'Rating',
-                accessor: 'rating',
-                filterable: true,
+                Header: 'Tweets',
+                accessor: 'tweets',
+                Cell: props => <span>{props.value.join(' / ')}</span>,
             },
             {
-                Header: 'Time',
-                accessor: 'time',
+                Header: 'Follows',
+                accessor: 'follows',
                 Cell: props => <span>{props.value.join(' / ')}</span>,
             },
             {

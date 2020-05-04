@@ -16,28 +16,48 @@ const Item = styled.div.attrs({
 
 class Links extends Component {
     render() {
-        return (
-            <React.Fragment>
-                <Link to="/" className="navbar-brand">
-                    My first MERN Application
+      return (
+        <React.Fragment>
+          <Link to="/" className="navbar-brand">
+            TweetFeed
+          </Link>
+          <Collapse>
+            <List>
+              <Item>
+                <Link to="/mockup" className="nav-link">
+                  Mockup
                 </Link>
-                <Collapse>
-                    <List>
-                        <Item>
-                            <Link to="/tweefs/list" className="nav-link">
-                                List tweefs
-                            </Link>
-                        </Item>
-                        <Item>
-                            <Link to="/tweefs/create" className="nav-link">
-                                Create Tweef
-                            </Link>
-                        </Item>
-                    </List>
-                </Collapse>
-            </React.Fragment>
-        )
-    }
+              </Item>
+              <Item>
+                <Link to="/tweefs/list" className="nav-link">
+                  List tweefs
+                </Link>
+              </Item>
+              <Item>
+                <Link to="/tweefs/create" className="nav-link">
+                  Create Tweef
+                </Link>
+              </Item>
+              <Item>
+                <Link to="/tweefs/user/id" className="nav-link">
+                  User
+                </Link>
+              </Item>
+              <Item>
+                <Link to="/tweefs/user/id/follows" className="nav-link">
+                  Follows
+                </Link>
+              </Item>
+              <Item>
+                <Link to="/tweefs/user/id/feed" className="nav-link">
+                  Feed
+                </Link>
+              </Item>
+            </List>
+          </Collapse>
+      </React.Fragment>
+    )
+  }
 }
 
 export default Links

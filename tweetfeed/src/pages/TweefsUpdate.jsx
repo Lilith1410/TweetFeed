@@ -41,41 +41,39 @@ class TweefsUpdate extends Component {
 
         this.state = {
             id: this.props.match.params.id,
-            name: '',
-            rating: '',
-            time: '',
+            userName: '',
+            tweets: '',
+            follows: '',
         }
     }
 
-    handleChangeInputName = async event => {
-        const name = event.target.value
-        this.setState({ name })
+    handleChangeInputUserName = async event => {
+        const userName = event.target.value
+        this.setState({ userName })
     }
 
-    handleChangeInputRating = async event => {
-        const rating = event.target.validity.valid
-            ? event.target.value
-            : this.state.rating
-
-        this.setState({ rating })
+    handleChangeInputTweets = async event => {
+        const tweets = event.target.value
+        this.setState({ tweets })
     }
 
-    handleChangeInputTime = async event => {
-        const time = event.target.value
-        this.setState({ time })
+    handleChangeInputFollows = async event => {
+        const follows = event.target.value
+        this.setState({ follows })
     }
 
     handleUpdateTweef = async () => {
-        const { id, name, rating, time } = this.state
-        const arrayTime = time.split('/')
-        const payload = { name, rating, time: arrayTime }
+        const { id, userName, tweets, follows } = this.state
+        const arrayFollows = follows.split('/')
+        const arrayTweets = tweets.split('/')
+        const payload = { userName, tweets: arrayTweets, follows: arrayFollows }
 
         await api.updateTweefById(id, payload).then(res => {
             window.alert(`Tweef updated successfully`)
             this.setState({
-                name: '',
-                rating: '',
-                time: '',
+                userName: '',
+                tweets: '',
+                follows: '',
             })
         })
     }
@@ -85,42 +83,37 @@ class TweefsUpdate extends Component {
         const tweef = await api.getTweefById(id)
 
         this.setState({
-            name: tweef.data.data.name,
-            rating: tweef.data.data.rating,
-            time: tweef.data.data.time.join('/'),
+            userName: tweef.data.data.userName,
+            tweets: tweef.data.data.tweets.join('/'),
+            follows: tweef.data.data.follows.join('/'),
         })
     }
 
     render() {
-        const { name, rating, time } = this.state
+        const { userName, tweets, follows } = this.state
         return (
             <Wrapper>
                 <Title>Create Tweef</Title>
 
-                <Label>Name: </Label>
+                <Label>Username: </Label>
                 <InputText
                     type="text"
-                    value={name}
-                    onChange={this.handleChangeInputName}
+                    value={userName}
+                    onChange={this.handleChangeInputUserName}
                 />
 
-                <Label>Rating: </Label>
-                <InputText
-                    type="number"
-                    step="0.1"
-                    lang="en-US"
-                    min="0"
-                    max="10"
-                    pattern="[0-9]+([,\.][0-9]+)?"
-                    value={rating}
-                    onChange={this.handleChangeInputRating}
-                />
-
-                <Label>Time: </Label>
+                <Label>Tweets: </Label>
                 <InputText
                     type="text"
-                    value={time}
-                    onChange={this.handleChangeInputTime}
+                    value={tweets}
+                    onChange={this.handleChangeInputTweets}
+                />
+
+                <Label>Follows: </Label>
+                <InputText
+                    type="text"
+                    value={follows}
+                    onChange={this.handleChangeInputFollows}
                 />
 
                 <Button onClick={this.handleUpdateTweef}>Update Tweef</Button>

@@ -52,9 +52,9 @@ updateTweef = async (req, res) => {
       })
     }
 
-    tweef.name = body.name
-    tweef.time = body.time
-    tweef.rating = body.rating
+    tweef.userName = body.userName
+    tweef.follows = body.follows
+    tweef.tweets = body.tweets
     tweef
       .save()
       .then(() => {
@@ -89,7 +89,6 @@ deleteTweef = async (req, res) => {
   }).catch(err => console.log(err))
 }
 
-
 getTweefById = async (req, res) => {
     await Tweef.findOne({ _id: req.params.id }, (err, tweef) => {
         if (err) {
@@ -119,6 +118,36 @@ getTweefs = async (req, res) => {
     }).catch(err => console.log(err))
 }
 
+getTweefByName = async (req, res) => {
+  await Tweef.find({ username: req.params.userName}, (err, tweef) => {
+    if(err) {
+      return res.status(400).json({success: false, error: err})
+    }
+
+    if(!tweef) {
+      return res
+          .status(404)
+          .json({success: false, error: `Tweef not found`})
+    }
+    return res.status(200).json({success: true, data: tweef })
+  }).catch(err => console.log(err))
+}
+
+deleteAllTweefs = async (req, res ) => {
+  await Tweef.deleteMany({}, (err, tweef) => {
+    if(err) {
+      return res.status(400).json({success: false, error: err})
+    }
+
+    if(!tweef) {
+      return res
+        .status(404)
+        .json({ success: false, error: 'Tweef not found' })
+    }
+
+    return res.status(200).json({ success: true, data: tweef})
+  }).catch(err => console.log(err))
+}
 
 module.exports = {
   createTweef,
@@ -126,4 +155,6 @@ module.exports = {
   deleteTweef,
   getTweefs,
   getTweefById,
+  getTweefByName,
+  deleteAllTweefs,
 }
