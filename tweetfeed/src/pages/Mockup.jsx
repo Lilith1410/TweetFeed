@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // using table only for the moment. change to drop down as soon as possible!
 import ReactTable from 'react-table'
+import 'react-table/react-table.css'
 import api from '../api'
 import Upload from './Upload'
 import DropDatabase from './DropDatabase'
@@ -12,6 +13,16 @@ const Wrapper = styled.div`
 `
 
 const Click = styled.div`
+    cursor: pointer;
+`
+
+const Update = styled.div`
+    color: #ef9b0f;
+    cursor: pointer;
+`
+
+const Delete = styled.div`
+    color: #ff0000;
     cursor: pointer;
 `
 
@@ -27,6 +38,37 @@ class ClickUserProfile extends Component {
   }
 }
 
+class UpdateTweef extends Component {
+  updateUser = event => {
+    event.preventDefault()
+
+    window.location.href = `/tweefs/update/${this.props.id}`
+  }
+
+  render() {
+    return <Update onClick={this.updateUser}>Update</Update>
+  }
+}
+
+class DeleteTweef extends Component {
+  deleteUser = event => {
+    event.preventDefault()
+
+    if(
+      window.confirm(
+        `Do tou want to delete the tweef ${this.props.id} permanently?`,
+      )
+    ) {
+      api.deleteTweefById(this.props.id)
+      window.location.reload()
+    }
+  }
+
+  render() {
+    return <Delete onClick={this.deleteUser}>Delete</Delete>
+  }
+}
+
 class Mockup extends Component {
 
   constructor(props) {
@@ -35,20 +77,24 @@ class Mockup extends Component {
     this.state = {
         tweefs: [],
         columns: [],
+        isLoading: false,
     }
   }
 
   componentDidMount = async () => {
+    this.setState({ isLoading: true })
+
     await api.getAllTweefs().then(tweefs => {
       this.setState({
-        tweefs: tweefs.data.data
+        tweefs: tweefs.data.data,
+        isLoading: false,
       })
     })
   }
 
   render() {
 
-    const { tweefs } = this.state
+    const { tweefs, isLoading } = this.state
 
     const columns = [
       {
@@ -71,6 +117,37 @@ class Mockup extends Component {
                   </span>
               )
           },
+      },{
+          Header: 'Tweets',
+          accessor: 'tweets',
+          Cell: props => <span>{props.value.join(' / ')}</span>,
+      },
+      {
+          Header: 'Follows',
+          accessor: 'follows',
+          Cell: props => <span>{props.value.join(' / ')}</span>,
+      },
+      {
+          Header: '',
+          accessor: '',
+          Cell: function(props) {
+              return (
+                  <span>
+                      <DeleteTweef id={props.original._id} />
+                  </span>
+              )
+          },
+      },
+      {
+          Header: '',
+          accessor: '',
+          Cell: function(props) {
+              return (
+                  <span>
+                      <UpdateTweef id={props.original._id} />
+                  </span>
+              )
+          },
       },
     ]
 
@@ -89,6 +166,7 @@ class Mockup extends Component {
             <ReactTable
                 data={tweefs}
                 columns={columns}
+                loading={isLoading}
                 defaultPageSize={10}
                 showPageSizeOptions={true}
                 minRows={0}
