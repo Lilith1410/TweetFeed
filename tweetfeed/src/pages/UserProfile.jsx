@@ -14,7 +14,9 @@ class UserProfile extends Component {
 
     this.state = {
       id: this.props.match.params.id,
-      userName:  ''
+      userName:  '',
+      follows: [],
+      tweets: [],
     }
   }
 
@@ -23,19 +25,21 @@ class UserProfile extends Component {
       const tweef = await api.getTweefById(id)
 
       this.setState({
-          userName: tweef.data.data.userName
+          userName: tweef.data.data.userName,
+          follows: tweef.data.data.follows,
+          tweets: tweef.data.data.tweets
       })
   }
 
   render() {
-    const { id, userName } = this.state
+    const { id, userName, follows, tweets } = this.state
     return (
       <Wrapper>
         <p>This is the User Profile Page! </p>
-        <br/>
-        <p>Username: {userName}</p>
-        <br/>
         <p>Id: {id}</p>
+        <p>Username: {userName}</p>
+        <p>Follows: {follows}</p>
+        <p>Tweets: {tweets}</p>
       </Wrapper>
 
     )
