@@ -29,11 +29,6 @@ class Links extends Component {
                 </Link>
               </Item>
               <Item>
-                <Link to="/tweefs/create" className="nav-link">
-                  Create Tweef
-                </Link>
-              </Item>
-              <Item>
                 <Link to="/tweefs/user/id" className="nav-link">
                   User
                 </Link>

@@ -8,6 +8,10 @@ import DropDatabase from './DropDatabase'
 
 import styled from 'styled-components'
 
+const Title = styled.h1.attrs({
+  className: 'h1',
+})``
+
 const Wrapper = styled.div`
     padding: 0 40px 40px 40px;
 `
@@ -24,6 +28,28 @@ const Update = styled.div`
 const Delete = styled.div`
     color: #ff0000;
     cursor: pointer;
+`
+
+const InputText = styled.input.attrs({
+    className: 'form-control',
+})`
+    margin: 5px;
+`
+
+const Label = styled.label`
+    margin: 5px;
+`
+
+const Button = styled.button.attrs({
+    className: `btn btn-primary`,
+})`
+    margin: 15px 15px 15px 5px;
+`
+
+const CancelButton = styled.a.attrs({
+    className: `btn btn-danger`,
+})`
+    margin: 15px 15px 15px 5px;
 `
 
 class ClickUserProfile extends Component {
@@ -75,9 +101,12 @@ class Mockup extends Component {
     super(props)
 
     this.state = {
-        tweefs: [],
-        columns: [],
-        isLoading: false,
+      userName: '',
+      tweets: '',
+      follows: '',
+      tweefs: [],
+      columns: [],
+      isLoading: false,
     }
   }
 
@@ -92,9 +121,40 @@ class Mockup extends Component {
     })
   }
 
+  handleChangeInputUserName = async event => {
+    const userName = event.target.value
+    this.setState({ userName })
+   }
+
+  handleChangeInputTweets = async event => {
+    const tweets = event.target.value
+    this.setState({ tweets })
+  }
+
+  handleChangeInputFollows = async event => {
+    const follows = event.target.value
+    this.setState({ follows })
+  }
+
+  handleIncludeTweef = async () => {
+    const { userName, tweets, follows } = this.state
+    const arrayFollows = follows.split('/')
+    const arrayTweets = tweets.split('/')
+    const payload = { userName, tweets: arrayTweets, follows: arrayFollows }
+
+    await api.insertTweef(payload).then(res => {
+      window.alert(`Tweef inserted successfully`)
+      this.setState({
+        userName: '',
+        tweets: '',
+        follows: '',
+      })
+    })
+  }
+
   render() {
 
-    const { tweefs, isLoading } = this.state
+    const { userName, tweets, follows, tweefs, isLoading } = this.state
 
     const columns = [
       {
@@ -180,6 +240,31 @@ class Mockup extends Component {
 
         <p>Upload the Tweet Files here please ^^  </p>
         <Upload typeOf="tweets"/>
+        <br/>
+        <Title>Create Tweef </Title>
+        <Label>Name: </Label>
+        <InputText
+          type="text"
+          value={userName}
+          onChange={this.handleChangeInputUserName}
+        />
+
+        <Label>Tweets: </Label>
+        <InputText
+          type="text"
+          value={tweets}
+          onChange={this.handleChangeInputTweets}
+        />
+
+        <Label>Follows: </Label>
+        <InputText
+          type="text"
+          value={follows}
+          onChange={this.handleChangeInputFollows}
+        />
+
+        <Button onClick={this.handleIncludeTweef}>Add Tweef</Button>
+        <CancelButton href={'/tweefs/list'}>Cancel</CancelButton>
       </Wrapper>
 
     )
